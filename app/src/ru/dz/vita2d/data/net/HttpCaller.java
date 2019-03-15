@@ -13,6 +13,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -121,6 +123,32 @@ public class HttpCaller {
 		return out;
 	}
 
+	protected JSONObject postAuth(String urlTail, String login, String password ) throws IOException {
+		HttpURLConnection conn = mkConn(urlTail);
+		conn.setRequestMethod("POST");
+		conn.setRequestProperty("Content-Type", "application/json");
+
+		String encoded = Base64.getEncoder().encodeToString((login+":"+password).getBytes(StandardCharsets.UTF_8));  //Java 8
+		conn.setRequestProperty("Authorization", "Basic "+encoded);	      
+		
+		{
+			conn.setDoOutput(true);
+			OutputStream os = conn.getOutputStream();
+			os.write(" ".getBytes());
+			os.flush();
+			os.close();
+		}
+		
+		checkResponceCode(conn);
+	
+		InputStream is = conn.getInputStream();
+	
+		JSONObject out = loadJSON(is);
+		conn.disconnect();
+		return out;
+	}
+	
+	
 	protected static final String UNIT_LIST_REST_PATH = "rest/units/%s/list";
 	protected static final String OTHER_LIST_REST_PATH = "rest/%s/list";
 	protected static final String OTHER_DICT_REST_PATH = "rest/%s/dict";

@@ -1,10 +1,8 @@
 package ru.dz.vita2d.data.net;
 
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URLEncoder;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -12,7 +10,6 @@ import org.json.JSONObject;
 import ru.dz.vita2d.data.ServerFileEntity;
 import ru.dz.vita2d.data.ref.IRef;
 import ru.dz.vita2d.data.ref.UnitRef;
-import ru.dz.vita2d.data.type.EntityType;
 import ru.dz.vita2d.data.type.IEntityType;
 import ru.dz.vita2d.data.type.ServerUnitType;
 
