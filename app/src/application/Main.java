@@ -75,6 +75,7 @@ public class Main extends Application
 		//primaryStage.initStyle(StageStyle.DECORATED);
 		logout();
 
+		/*
 		try {
 
 			AprentisRestCaller rc = new AprentisRestCaller("https://app.aprentis.ru");
@@ -87,7 +88,7 @@ public class Main extends Application
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 
 	}    
 

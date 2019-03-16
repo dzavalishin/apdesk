@@ -93,7 +93,9 @@ public class AprentisField {
 
 	@Override
 	public String toString() {
-		return name + "='"+valString+"'";
+		//return name + "='"+valString+"'";
+		if( value == null ) return "(null)";
+		return value.toString();
 	}
 
 	public String dump() {

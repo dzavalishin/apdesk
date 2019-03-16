@@ -2,6 +2,7 @@ package application;
 
 import java.io.IOException;
 
+import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -17,6 +18,9 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import ru.dz.aprentis.data.AprentisCategory;
+import ru.dz.aprentis.data.AprentisRestCaller;
+import ru.dz.aprentis.ui.AprentisEntityListWindow;
 import ru.dz.vita2d.data.ref.IRef;
 import ru.dz.vita2d.data.ref.UnitRef;
 import ru.dz.vita2d.data.type.ServerUnitType;
@@ -106,7 +110,8 @@ public abstract class AbstractMapScene implements IMapScene
 		
 		
 		Menu dataMenu = new Menu("Данные");
-	
+
+		/*
 		ServerUnitType.forEach(t -> {
 			String name = t.getPluralDisplayName();
 			
@@ -119,44 +124,15 @@ public abstract class AbstractMapScene implements IMapScene
 			dataItem.setOnAction(actionEvent -> new EntityListWindow(t, main.rc, main.sc));
 	
 			dataMenu.getItems().add(dataItem);			
-		});
+		});*/
 		
-		//dataMenu.Menu debugMenu = new Menu("Debug");
-		//MenuItem d1 = new MenuItem("На общую карту");
-		//d1.setOnAction(actionEvent -> setMapData(main.ml.getRootMap()));
+		newAprenticeMenuItem( dataMenu.getItems(), "Группы", "c564a1259t2r");
+		newAprenticeMenuItem( dataMenu.getItems(), "Камеры", "c564a1259t4r");
+		newAprenticeMenuItem( dataMenu.getItems(), "Типы событий", "c564a1259t6r");
+		newAprenticeMenuItem( dataMenu.getItems(), "Типы действий", "c564a1259t7r");
+		
 	
 		
-		/*
-	    Menu webMenu = new Menu("Web");
-	    CheckMenuItem htmlMenuItem = new CheckMenuItem("HTML");
-	    htmlMenuItem.setSelected(true);
-	    webMenu.getItems().add(htmlMenuItem);
-	
-	    CheckMenuItem cssMenuItem = new CheckMenuItem("CSS");
-	    cssMenuItem.setSelected(true);
-	    webMenu.getItems().add(cssMenuItem);
-	
-	    Menu sqlMenu = new Menu("SQL");
-	    ToggleGroup tGroup = new ToggleGroup();
-	    RadioMenuItem mysqlItem = new RadioMenuItem("MySQL");
-	    mysqlItem.setToggleGroup(tGroup);
-	
-	    RadioMenuItem oracleItem = new RadioMenuItem("Oracle");
-	    oracleItem.setToggleGroup(tGroup);
-	    oracleItem.setSelected(true);
-	
-	    sqlMenu.getItems().addAll(mysqlItem, oracleItem,
-	        new SeparatorMenuItem());
-	
-	    Menu tutorialManeu = new Menu("Tutorial");
-	    tutorialManeu.getItems().addAll(
-	        new CheckMenuItem("Java"),
-	        new CheckMenuItem("JavaFX"),
-	        new CheckMenuItem("Swing"));
-	
-	    sqlMenu.getItems().add(tutorialManeu);
-		 */
-	
 		Menu aboutMenu = new Menu("О системе");
 	
 		MenuItem version = new MenuItem("Версия");
@@ -174,6 +150,27 @@ public abstract class AbstractMapScene implements IMapScene
 	
 		//menuBar.getMenus().addAll(fileMenu, webMenu, sqlMenu);
 		menuBar.getMenus().addAll(fileMenu, navMenu, dataMenu, aboutMenu );
+	}
+
+	private void newAprenticeMenuItem(ObservableList<MenuItem> items, String name, String tableKey) 
+	{
+		MenuItem dataItem = new MenuItem(name);
+		dataItem.setOnAction(actionEvent -> {
+			AprentisRestCaller rc = new AprentisRestCaller("https://app.aprentis.ru");
+
+			try {
+				rc.login("restapi@facex.com","facex");
+				AprentisCategory ac3 = rc.loadCategory(tableKey);
+				AprentisEntityListWindow alw = new AprentisEntityListWindow(ac3);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			
+		});
+
+		items.add(dataItem);			
 	}
 
 	private void fillLayersMenu(Menu navLayers) 

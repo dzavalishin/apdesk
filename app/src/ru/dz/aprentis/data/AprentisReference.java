@@ -18,4 +18,7 @@ public class AprentisReference extends AprentisFieldValue {
 
 	//public void setReference(String reference) {		this.reference = reference;	}
 
+	@Override
+	public String toString() { return label; }
+
 }

@@ -18,4 +18,7 @@ public class AprentisEnum extends AprentisFieldValue {
 
 	//public void setValue(int value) {		this.value = value;	}
 
+	@Override
+	public String toString() { return label; }
+	
 }
