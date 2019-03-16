@@ -6,46 +6,26 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.MapValueFactory;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.util.Pair;
 import ru.dz.aprentis.data.AprentisCategory;
-import ru.dz.aprentis.data.AprentisField;
 import ru.dz.aprentis.data.AprentisRecord;
-import ru.dz.vita2d.data.DataConvertor;
-import ru.dz.vita2d.data.ITypeCache;
+import ru.dz.aprentis.data.AprentisRecordReference;
 import ru.dz.vita2d.data.filter.FilterSet;
-import ru.dz.vita2d.data.model.ModelFieldDefinition;
-import ru.dz.vita2d.data.net.RestCaller;
-import ru.dz.vita2d.data.net.ServerCache;
-import ru.dz.vita2d.data.type.ServerUnitType;
-import ru.dz.vita2d.ui.FilterDialog;
-import ru.dz.vita2d.unused.JsonAsFlowDialog;
 /**
  * </p>Display list of entities.</p>
  * 
@@ -99,13 +79,6 @@ public class AprentisEntityListView
 
 	public Pane create()	
 	{
-		//Group root = new Group();
-
-		//final Label label = new Label(type.getDisplayName());
-		//label.setFont(new Font("Arial", 20));
-
-
-		//TableView<Map>
 		generateDataInMap(allData);
 		table = new TableView<>(allData);
 
@@ -113,7 +86,8 @@ public class AprentisEntityListView
 		table.getSelectionModel().setCellSelectionEnabled(true);
 		table.setMinWidth(600);
 
-		placeFirst(table, "shortName");
+		placeFirst(table, "ref");
+		//placeFirst(table, "shortName");
 		//placeFirst(table, "unitName"); // no shortName in 
 
 		fieldNames.forEach(fName -> {
@@ -126,28 +100,28 @@ public class AprentisEntityListView
 				if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
 					Map<String,String> rowData = row.getItem();
 					//System.out.println(rowData);
-					String sid = rowData.get("id");
+					String sid = rowData.get("ref");
 					if( sid == null )
 					{
 						// TODO log error
 						return;
 					}
-					int id = Integer.parseInt(sid); 
-					//System.out.println(id);
 
-					/*
+
 					try {
+						AprentisRecordReference ref = new AprentisRecordReference(sid);
 						// TODO fix back
-						EntityFormWindow fw = new EntityFormWindow(type, tc, id);
+						AprentisEntityFormWindow fw = new AprentisEntityFormWindow( ac, ref );
 
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					 */
+
 				}
 			});
-			return row ;
+			
+			return row;
 		});
 
 
@@ -219,6 +193,8 @@ public class AprentisEntityListView
 
 	private void loadEntity(AprentisRecord ar, Map<String, String> dataRow, BoolPtr ok ) {
 
+		dataRow.put("ref", ar.getKey()); // used by doubleclick to open form
+
 		ar.forEachField( af -> {
 			
 			String fieldName = af.getName();
@@ -233,6 +209,7 @@ public class AprentisEntityListView
 
 		});
 
+		
 		/*
 		odata.keySet().forEach(fName -> 
 		{ 

@@ -9,35 +9,22 @@ import org.json.JSONObject;
 
 public class AprentisCategory extends AprentisEntity 
 {
+	private Map<String,AprentisRecord> records = new HashMap<String, AprentisRecord>();
 
 	public AprentisCategory() {
 		// TODO Auto-generated constructor stub
 	}
-	private Map<String,AprentisRecord> records = new HashMap<String, AprentisRecord>();
 	
 
 
 	protected void loadData( JSONObject jo )
 	{
 		JSONArray list = jo.getJSONArray("list");
-		list.forEach( le -> {
-			
-			//System.out.println(le);
-			
-			JSONObject ce = (JSONObject)le;
-			
-			AprentisRecord ar = new AprentisRecord(ce);
-			
-			records.put(ar.getKey(), ar);
-			
-			/*
-			setKey( ce.getString("key") );
-			System.out.print(getKey()+": ");
-			
-			JSONObject fields = ce.getJSONObject("fields");
-			
-			System.out.println(fields);
-			*/
+		list.forEach( le -> 
+		{			
+			JSONObject ce = (JSONObject)le;			
+			AprentisRecord ar = new AprentisRecord(ce);			
+			records.put(ar.getKey(), ar);			
 		});
 
 		//for (int i = 0; i < arr.length(); i++) {			  arr.getJSONObject(i);			}
@@ -49,6 +36,13 @@ public class AprentisCategory extends AprentisEntity
 		for (AprentisRecord r : records.values()) {
 			c.accept(r);
 		}		
+	}
+
+
+
+	public AprentisRecord getRecord(AprentisRecordReference arr) 
+	{
+		return records.get(arr.getAsString());
 	}
 
 }

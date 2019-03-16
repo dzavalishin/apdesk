@@ -141,8 +141,8 @@ public abstract class AbstractMapScene implements IMapScene
 		MenuItem aboutDz = new MenuItem("Digital Zone");
 		aboutDz.setOnAction(actionEvent -> main.getHostServices().showDocument(Defs.HOME_URL));
 	
-		MenuItem aboutVita = new MenuItem("VitaSoft");
-		aboutVita.setOnAction(actionEvent -> main.getHostServices().showDocument("vtsft.ru"));
+		MenuItem aboutVita = new MenuItem("Aprentis");
+		aboutVita.setOnAction(actionEvent -> main.getHostServices().showDocument("aprentis.ru"));
 	
 		aboutMenu.getItems().addAll( version, new SeparatorMenuItem(), aboutDz, aboutVita );
 	
