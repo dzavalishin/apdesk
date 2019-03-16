@@ -21,7 +21,7 @@ import javafx.scene.text.Font;
 import ru.dz.aprentis.data.AprentisCategory;
 import ru.dz.aprentis.data.AprentisRecord;
 import ru.dz.aprentis.data.AprentisRecordReference;
-import ru.dz.aprentis.data.AprentisReference;
+import ru.dz.aprentis.data.type.AprentisReference;
 import ru.dz.vita2d.data.model.ModelFieldDefinition;
 import ru.dz.vita2d.data.ref.EntityRef;
 import ru.dz.vita2d.data.ref.IRef;

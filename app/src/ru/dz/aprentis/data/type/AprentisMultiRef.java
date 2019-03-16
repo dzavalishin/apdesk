@@ -1,10 +1,12 @@
-package ru.dz.aprentis.data;
+package ru.dz.aprentis.data.type;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import ru.dz.aprentis.data.AprentisFieldValue;
 
 public class AprentisMultiRef extends AprentisFieldValue 
 {

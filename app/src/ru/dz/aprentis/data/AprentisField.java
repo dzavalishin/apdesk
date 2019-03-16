@@ -3,6 +3,16 @@ package ru.dz.aprentis.data;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import ru.dz.aprentis.data.type.AprentisBool;
+import ru.dz.aprentis.data.type.AprentisDocument;
+import ru.dz.aprentis.data.type.AprentisEnum;
+import ru.dz.aprentis.data.type.AprentisImage;
+import ru.dz.aprentis.data.type.AprentisMultiRef;
+import ru.dz.aprentis.data.type.AprentisNull;
+import ru.dz.aprentis.data.type.AprentisNumeric;
+import ru.dz.aprentis.data.type.AprentisReference;
+import ru.dz.aprentis.data.type.AprentisString;
+
 public class AprentisField {
 
 	private String name;
@@ -27,7 +37,16 @@ public class AprentisField {
 			return;
 		}
 
-		// TODO numeric
+		if (val instanceof Double) {
+			Double dv = (Double) val;
+			value = new AprentisNumeric(dv);
+			valString = value.toString();
+		}
+		
+		if (val instanceof Boolean) {
+			value = new AprentisBool((Boolean)val);
+			valString = value.toString();
+		}
 		
 		if (val instanceof String) {
 			String vs = (String) val;

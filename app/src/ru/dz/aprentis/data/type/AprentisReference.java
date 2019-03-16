@@ -1,4 +1,6 @@
-package ru.dz.aprentis.data;
+package ru.dz.aprentis.data.type;
+
+import ru.dz.aprentis.data.AprentisFieldValue;
 
 public class AprentisReference extends AprentisFieldValue {
 

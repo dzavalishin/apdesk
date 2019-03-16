@@ -1,8 +1,10 @@
-package ru.dz.aprentis.data;
+package ru.dz.aprentis.data.type;
 
 import java.util.Base64;
 
 import org.json.JSONObject;
+
+import ru.dz.aprentis.data.AprentisFieldValue;
 
 public class AprentisImage extends AprentisFieldValue {
 
