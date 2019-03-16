@@ -1,4 +1,4 @@
-package ru.dz.vita2d.data.net;
+package ru.dz.aprentis.data;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -6,6 +6,8 @@ import java.net.MalformedURLException;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import ru.dz.vita2d.data.net.HttpCaller;
 
 
 /**

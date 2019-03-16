@@ -1,4 +1,4 @@
-package ru.dz.vita2d.data.net;
+package ru.dz.aprentis.data;
 
 import java.util.HashSet;
 import java.util.Set;
