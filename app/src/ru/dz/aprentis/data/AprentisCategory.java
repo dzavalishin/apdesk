@@ -2,6 +2,7 @@ package ru.dz.aprentis.data;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Consumer;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -40,6 +41,14 @@ public class AprentisCategory extends AprentisEntity
 		});
 
 		//for (int i = 0; i < arr.length(); i++) {			  arr.getJSONObject(i);			}
+	}
+
+
+
+	public void forEachRecord(Consumer<AprentisRecord> c) {
+		for (AprentisRecord r : records.values()) {
+			c.accept(r);
+		}		
 	}
 
 }

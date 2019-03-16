@@ -18,6 +18,9 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import ru.dz.aprentis.data.AprentisCategory;
+import ru.dz.aprentis.data.AprentisRestCaller;
+import ru.dz.aprentis.ui.AprentisEntityListWindow;
 import ru.dz.vita2d.data.net.CacheRestCaller;
 import ru.dz.vita2d.data.net.IRestCaller;
 import ru.dz.vita2d.data.net.RestCaller;
@@ -38,9 +41,9 @@ public class Main extends Application
 	public MapList ml;
 
 	public Properties property = new Properties();
-	
+
 	public LocalFileStorage store = new LocalFileStorage(); 
-	
+
 	@Override
 	public void init() throws Exception {
 		super.init();
@@ -52,7 +55,7 @@ public class Main extends Application
 		rc = new RestCaller(property.getProperty(Defs.PROP_HOST, Defs.HOST_NAME) );
 		//rc = new CacheRestCaller( new RestCaller(property.getProperty(Defs.PROP_HOST, Defs.HOST_NAME) ) );
 		sc = new ServerCache(rc);
-	
+
 		// Load data from local file with list of maps
 		ml = new MapList();
 
@@ -61,31 +64,45 @@ public class Main extends Application
 	@Override
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
-		
+
 		if( Defs.FULL_SCREEN)
 		{
 			//primaryStage.initStyle(StageStyle.UNDECORATED);
 			primaryStage.setMaximized(true);		
 			primaryStage.setResizable(false);
 		}
-		
-		
+
 		//primaryStage.initStyle(StageStyle.DECORATED);
 		logout();
+
+		try {
+
+			AprentisRestCaller rc = new AprentisRestCaller("https://app.aprentis.ru");
+
+			rc.login("restapi@facex.com","facex");
+
+			AprentisCategory ac3 = rc.loadCategory("c564a1259t4r");
+			AprentisEntityListWindow alw = new AprentisEntityListWindow(ac3);
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}    
 
 	LoginFormWindow lw;
-	
+
 	public void logout() {
 		//LoginScene ls = 
 		//new LoginScene(rc, primaryStage, this );
 		new BackgroundScene( primaryStage );
-		
+
 		//do {
 		lw = new LoginFormWindow(rc, login -> afterLogin() );
 		//} while(!lw.isLoggedIn());
 
-		
+
 	}
 
 	public void afterLogin() {
@@ -93,7 +110,7 @@ public class Main extends Application
 		lw.close();
 		AbstractMapScene ms = new MapScene( primaryStage, this );
 		ms.setMapData( ml.getRootMap() );
-		
+
 		if( !Defs.FULL_SCREEN )
 			primaryStage.centerOnScreen();
 
@@ -111,7 +128,7 @@ public class Main extends Application
 
 	public void requestShutdown() {
 		//System.
-		
+
 		try {
 			Alert alert = new Alert(AlertType.CONFIRMATION);
 			alert.setTitle("Выключение системы");
@@ -121,15 +138,15 @@ public class Main extends Application
 
 			alert.setContentText(s);
 			Optional<ButtonType> bt = alert.showAndWait();
-			
+
 			if (alert.getResult() == ButtonType.YES) {
 				Runtime.getRuntime().exec("shutdown -s -f");
 			}
-			
+
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
-		
+
 		Platform.exit();
 	}
 

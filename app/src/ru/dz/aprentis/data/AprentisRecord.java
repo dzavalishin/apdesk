@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Consumer;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -12,8 +13,8 @@ import org.json.JSONObject;
 
 public class AprentisRecord extends AprentisEntity {
 
-	private Map<String,String> data = new HashMap<String, String>();
-	
+	//private Map<String,String> data = new HashMap<String, String>();
+	private Set<AprentisField> fields = new HashSet<AprentisField>();
 	//public AprentisRecord() {
 		// TODO Auto-generated constructor stub
 	//}
@@ -36,31 +37,37 @@ public class AprentisRecord extends AprentisEntity {
 			setKey( ce.getString("key") );
 			System.out.println(getKey()+": ");
 			
-			JSONObject fields = ce.getJSONObject("fields");
+			JSONObject jsFields = ce.getJSONObject("fields");
 			
 			//System.out.println(fields);
 			
 			
-			for( String key : fields.keySet() )
+			for( String key : jsFields.keySet() )
 			{
 				AprentisField af;
 				
-				if( fields.isNull(key) )
+				if( jsFields.isNull(key) )
 					af = new AprentisField( key, null );
 				else
 				{
 					//String val = fields.getString(key);
-					Object val = fields.get(key);
+					Object val = jsFields.get(key);
 					//System.out.println(key + "=" + val + " ");
 					af = new AprentisField( key, val );
 				}
 				System.out.println("   " + af );
+				fields.add(af);
 			}
 			
 			System.out.println("");
 		//});
 
 		//for (int i = 0; i < arr.length(); i++) {			  arr.getJSONObject(i);			}
+	}
+
+
+	public void forEachField(Consumer<AprentisField> c) {
+		fields.forEach(c);		
 	}
 	
 }

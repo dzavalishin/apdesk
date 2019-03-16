@@ -7,6 +7,7 @@ import java.net.MalformedURLException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import ru.dz.aprentis.ui.AprentisEntityListWindow;
 import ru.dz.vita2d.data.net.HttpCaller;
 
 
@@ -270,6 +271,7 @@ public class AprentisRestCaller extends HttpCaller //implements IRestCaller
 
 			AprentisCategory ac3 = rc.loadCategory("c564a1259t4r");
 
+			//AprentisEntityListWindow alw = new AprentisEntityListWindow(ac3);
 
 		} catch (MalformedURLException e) {
 
@@ -286,7 +288,7 @@ public class AprentisRestCaller extends HttpCaller //implements IRestCaller
 	}
 
 
-	private AprentisCategory loadCategory(String categoryKey) throws IOException {
+	public AprentisCategory loadCategory(String categoryKey) throws IOException {
 		JSONObject jo = getData(categoryKey);
 		//dumpJson(jo);
 
