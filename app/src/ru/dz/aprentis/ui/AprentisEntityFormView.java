@@ -4,9 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
-
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,17 +21,10 @@ import javafx.scene.text.Font;
 import ru.dz.aprentis.data.AprentisCategory;
 import ru.dz.aprentis.data.AprentisRecord;
 import ru.dz.aprentis.data.AprentisRecordReference;
-import ru.dz.vita2d.data.DataConvertor;
-import ru.dz.vita2d.data.IEntityDataSource;
-import ru.dz.vita2d.data.ITypeCache;
+import ru.dz.aprentis.data.AprentisReference;
 import ru.dz.vita2d.data.model.ModelFieldDefinition;
-import ru.dz.vita2d.data.net.IRestCaller;
-import ru.dz.vita2d.data.net.ServerCache;
 import ru.dz.vita2d.data.ref.EntityRef;
 import ru.dz.vita2d.data.ref.IRef;
-import ru.dz.vita2d.data.type.AbstractEntityType;
-import ru.dz.vita2d.data.type.IEntityType;
-import ru.dz.vita2d.data.type.ServerUnitType;
 
 /**
  * </p>Display list entity fields.</p>
@@ -164,7 +155,7 @@ public class AprentisEntityFormView {
 	// TODO implement
 	private void onDoubleClick(TableRow<Map<String, String>> row) 
 	{
-		/*
+		
 		Map<String, String> rowData = row.getItem();
 	
 		if(rowData == null)
@@ -174,7 +165,9 @@ public class AprentisEntityFormView {
 		if(ref == null)
 			return;
 
-		//System.out.println(rowData);
+		// TODO open view
+		System.out.println("go to "+ref);
+		/*
 		IRef iref = IRef.deserialize(ref);
 		try {
 			//IEntityDataSource instance = iref.instantiate(tc.getServerCache());
@@ -238,12 +231,25 @@ public class AprentisEntityFormView {
 			
 			allData.add(dataRow);
 			
+			if (rf.getValue() instanceof AprentisReference) {
+				AprentisReference rv = (AprentisReference) rf.getValue();
+			
+				dataRow.put("ref", rv.getReference() );
+				dataRow.put("li", "ссылка" );
+			}
+			else
+				dataRow.put("li", "" );
+				
+			
 		});
 
+		String title = record.getTtile();
+		shortNameLabel.setText(title);
+		
 		return allData;
 	}
 
-
+/*
 	private void processReference(Object jsonSrc, ModelFieldDefinition fieldModel, Map<String, String> dataRow) {
 		if( (fieldModel != null) && fieldModel.isReference())
 		{
@@ -265,7 +271,7 @@ public class AprentisEntityFormView {
 		else
 			dataRow.put("li", "" );
 	}
-
+*/
 
 	public String getTitle() {
 		return title;

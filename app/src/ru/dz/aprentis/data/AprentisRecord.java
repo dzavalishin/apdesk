@@ -50,4 +50,10 @@ public class AprentisRecord extends AprentisEntity
 		fields.forEach(c);		
 	}
 
+
+	public String getTtile() {
+		// TODO find some better title!
+		return getKey();
+	}
+
 }

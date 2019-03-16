@@ -1,8 +1,5 @@
 package ru.dz.aprentis.data;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 

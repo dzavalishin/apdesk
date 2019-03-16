@@ -1,12 +1,9 @@
 package application;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Optional;
 import java.util.Properties;
-
-import javafx.animation.AnimationTimer;
 
 // http://sv-web-15.vtsft.ru/orvd-release/index/#
 // http://sv-web-15.vtsft.ru/orvd-test/index/#
@@ -17,11 +14,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import ru.dz.aprentis.data.AprentisCategory;
-import ru.dz.aprentis.data.AprentisRestCaller;
-import ru.dz.aprentis.ui.AprentisEntityListWindow;
-import ru.dz.vita2d.data.net.CacheRestCaller;
 import ru.dz.vita2d.data.net.IRestCaller;
 import ru.dz.vita2d.data.net.RestCaller;
 import ru.dz.vita2d.data.net.ServerCache;
