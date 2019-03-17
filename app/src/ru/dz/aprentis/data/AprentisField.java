@@ -13,23 +13,18 @@ import ru.dz.aprentis.data.type.AprentisNumeric;
 import ru.dz.aprentis.data.type.AprentisReference;
 import ru.dz.aprentis.data.type.AprentisString;
 
-public class AprentisField {
+public class AprentisField 
+{
 
 	private String name;
 	private Object inputVal;
-
 	private String valString;
-	//private String ref;
-	//private int num;
 
 	private AprentisFieldValue value;
 
 	public AprentisField(String name, Object val) {
 		this.name = name;
 		this.inputVal = val;
-
-		//System.out.println(val.getClass());
-		//System.out.println(val);
 
 		if (val == null)
 		{

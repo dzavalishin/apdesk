@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.json.JSONObject;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -22,9 +20,6 @@ import ru.dz.aprentis.data.AprentisCategory;
 import ru.dz.aprentis.data.AprentisRecord;
 import ru.dz.aprentis.data.AprentisRecordReference;
 import ru.dz.aprentis.data.type.AprentisReference;
-import ru.dz.vita2d.data.model.ModelFieldDefinition;
-import ru.dz.vita2d.data.ref.EntityRef;
-import ru.dz.vita2d.data.ref.IRef;
 
 /**
  * </p>Display list entity fields.</p>
@@ -33,16 +28,10 @@ import ru.dz.vita2d.data.ref.IRef;
  *
  */
 
-public class AprentisEntityFormView {
-
-	//private IEntityType type;
-	//private RestCaller rc;
-	//private ITypeCache tc;
-
-	//private JSONObject jo;			// Data
+public class AprentisEntityFormView 
+{
 
 	private Label shortNameLabel = new Label("");
-	//private int entityId;
 
 	private String title = "";
 	private AprentisCategory ac;
@@ -50,60 +39,27 @@ public class AprentisEntityFormView {
 
 	private AprentisRecord record;
 
-	/**
-	 * Display entity data.
-	 * @param arr 
-	 * 
-	 * @param type
-	 * @param rc
-	 * @param sc
-	 * @param entityId - id of object to display (will request from server)
-	 * @throws IOException 
-	 * /
 
-	public AprentisEntityFormView(IEntityType type, ITypeCache tc, int entityId) throws IOException 
+	public AprentisEntityFormView(AprentisCategory ac, AprentisRecordReference arr) throws IOException 
 	{
-		super();
-
-		this.type = type;
-		//this.rc = rc;
-		this.tc = tc;
-		this.entityId = entityId;
-
-		loadData(type, tc, entityId);
-	}*/
-
-	public AprentisEntityFormView(AprentisCategory ac, AprentisRecordReference arr) throws IOException {
 		super();
 		this.ac = ac;
 		this.arr = arr;
 
 		record = ac.getRecord( arr );
-		
+
 		//this.type = ref.getType();
 		//this.tc = ref.getPerTypeCache(sc);
 		//this.entityId = ref.getId();
 
-		//loadData(type, tc, entityId);
-		}
+	}
 
 
-	/*
-	private void loadData(IEntityType type, ITypeCache tc, int entityId) throws IOException {
-		JSONObject record;
 
-		record = tc.getServerCache().getDataRecord(type, entityId);
 
-		//System.out.println(record);
-		JSONObject entity = record.getJSONObject("entity");
 
-		jo = entity;
-	}*/
 
-	
-	
-	
-	
+
 	public Pane create()	
 	{
 		shortNameLabel.setFont(new Font("Arial", 20));
@@ -126,10 +82,10 @@ public class AprentisEntityFormView {
 		TableColumn<Map<String,String>, String> col3 = new TableColumn<>("Ссылка");
 		col3.setCellValueFactory(new MapValueFactory("li"));
 		table.getColumns().add(col3);
-		
+
 		setOnClick(table);
-		
-		
+
+
 		final VBox vbox = new VBox();
 
 		vbox.setSpacing(5);
@@ -142,25 +98,25 @@ public class AprentisEntityFormView {
 
 	private void setOnClick(TableView<Map<String, String>> table) {
 		table.setRowFactory( tv -> {
-		    TableRow<Map<String,String>> row = new TableRow<>();
-		    row.setOnMouseClicked(event -> {
-		        if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
-		            onDoubleClick(row);
-		        }
-		    });
-		    return row ;
+			TableRow<Map<String,String>> row = new TableRow<>();
+			row.setOnMouseClicked(event -> {
+				if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+					onDoubleClick(row);
+				}
+			});
+			return row ;
 		});
 	}
 
 	// TODO implement
 	private void onDoubleClick(TableRow<Map<String, String>> row) 
 	{
-		
+
 		Map<String, String> rowData = row.getItem();
-	
+
 		if(rowData == null)
 			return;
-		
+
 		String ref = rowData.get("ref");
 		if(ref == null)
 			return;
@@ -172,14 +128,14 @@ public class AprentisEntityFormView {
 		try {
 			//IEntityDataSource instance = iref.instantiate(tc.getServerCache());
 			//System.out.println(instance.getJson());
-			
+
 			new EntityFormWindow(iref, tc.getServerCache());
-			
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		*/
+		 */
 	}
 
 
@@ -213,13 +169,13 @@ public class AprentisEntityFormView {
 					dataRow.put("fv", val );
 
 					processReference(object, fieldModel, dataRow);
-					
+
 					allData.add(dataRow);
 				}
 			});
-		
+
 		}	    
-		*/
+		 */
 
 		record.forEachField( rf -> {
 			Map<String, String> dataRow = new HashMap<>();
@@ -228,28 +184,28 @@ public class AprentisEntityFormView {
 			dataRow.put("fv", rf.getValue().toString() );
 
 			//processReference(object, fieldModel, dataRow);
-			
+
 			allData.add(dataRow);
-			
+
 			if (rf.getValue() instanceof AprentisReference) {
 				AprentisReference rv = (AprentisReference) rf.getValue();
-			
+
 				dataRow.put("ref", rv.getReference() );
 				dataRow.put("li", "ссылка" );
 			}
 			else
 				dataRow.put("li", "" );
-				
-			
+
+
 		});
 
 		String title = record.getTtile();
 		shortNameLabel.setText(title);
-		
+
 		return allData;
 	}
 
-/*
+	/*
 	private void processReference(Object jsonSrc, ModelFieldDefinition fieldModel, Map<String, String> dataRow) {
 		if( (fieldModel != null) && fieldModel.isReference())
 		{
@@ -257,21 +213,21 @@ public class AprentisEntityFormView {
 			int id = -1;
 			if (jsonSrc instanceof JSONObject) {
 				JSONObject j = (JSONObject) jsonSrc;
-				
+
 				if( j.has("id") )
 					id = j.getInt("id");
 			}
-			
+
 			//System.out.println("ref ent="+entity+" id="+id);
 			IRef ref = new EntityRef( entity, id );
-			
+
 			dataRow.put("ref", ref.serialize() );
 			dataRow.put("li", "ссылка" );
 		}
 		else
 			dataRow.put("li", "" );
 	}
-*/
+	 */
 
 	public String getTitle() {
 		return title;
