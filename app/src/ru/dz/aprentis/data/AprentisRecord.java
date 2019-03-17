@@ -1,14 +1,18 @@
 package ru.dz.aprentis.data;
 
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Consumer;
 
 import org.json.JSONObject;
 
+import ru.dz.aprentis.Engine;
+
 
 public class AprentisRecord extends AprentisEntity 
 {
+	private boolean didFullLoad = false;
 
 	private Set<AprentisField> fields = new HashSet<AprentisField>();
 
@@ -56,4 +60,29 @@ public class AprentisRecord extends AprentisEntity
 		return getKey();
 	}
 
+	
+	void performFullLoad()
+	{
+		System.err.println("full load");
+		synchronized (fields) 
+		{			
+			if( didFullLoad ) return;
+		
+
+			try {
+				AprentisRestCaller rc = Engine.getRestCaller();
+				JSONObject jo = rc.loadRecord(getKey());
+
+				loadFromJSON(jo);
+				
+				didFullLoad = true;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+
+		}
+	}
+	
 }

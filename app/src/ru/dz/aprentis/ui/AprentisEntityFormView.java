@@ -18,10 +18,12 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import ru.dz.aprentis.Engine;
 import ru.dz.aprentis.data.AprentisCategory;
+import ru.dz.aprentis.data.AprentisFieldValue;
 import ru.dz.aprentis.data.AprentisRecord;
 import ru.dz.aprentis.data.ref.AprentisCategoryReference;
 import ru.dz.aprentis.data.ref.AprentisRecordReference;
 import ru.dz.aprentis.data.type.AprentisReference;
+import ru.dz.aprentis.data.type.AprentisString;
 
 /**
  * </p>Display list entity fields.</p>
@@ -193,14 +195,16 @@ public class AprentisEntityFormView
 			Map<String, String> dataRow = new HashMap<>();
 
 			dataRow.put("fn", rf.getName() );
-			dataRow.put("fv", rf.getValue().toString() );
+			AprentisFieldValue value = rf.getValue();
+			if( value == null ) value = new AprentisString("");
+			dataRow.put("fv", value.toString() );
 
 			//processReference(object, fieldModel, dataRow);
 
 			allData.add(dataRow);
 
-			if (rf.getValue() instanceof AprentisReference) {
-				AprentisReference rv = (AprentisReference) rf.getValue();
+			if (value instanceof AprentisReference) {
+				AprentisReference rv = (AprentisReference) value;
 
 				dataRow.put("ref", rv.getReference() );
 				dataRow.put("li", "ссылка" );

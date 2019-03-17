@@ -134,7 +134,7 @@ public class AprentisRestCaller extends HttpCaller //implements IRestCaller
 
 			//AprentisCategory ac2 = rc.loadCategory("c564a1259t1r");
 
-			AprentisCategory ac3 = rc.loadCategory("c564a1259t4r");
+			AprentisCategory ac3 = rc.loadCategory(new AprentisCategoryReference("c564a1259t4r"));
 
 			//AprentisEntityListWindow alw = new AprentisEntityListWindow(ac3);
 			//new AprentisEntityListWindow(ac3);
@@ -154,26 +154,40 @@ public class AprentisRestCaller extends HttpCaller //implements IRestCaller
 	}
 
 
-	public AprentisCategory loadCategory(String categoryKey) throws IOException {
-		JSONObject jo = getData(categoryKey);
+	public AprentisCategory loadCategory(AprentisCategoryReference ref) throws IOException {
+		JSONObject jo = getData(ref.getAsString());
 		//dumpJson(jo);
-		System.out.println(jo);
+		//System.out.println(jo);
 
 		//AprentisRecord ar = new AprentisRecord(jo);
 		AprentisCategory ac = new AprentisCategory();
 		ac.loadData(jo);
 		
-		JSONObject mjo = getMetaData(categoryKey);
-		ac.loadMetaData(mjo);
+		// Subclasses of AprentisCategoryReference are system categories and this does not work for them
+		if( ref.getClass() == AprentisCategoryReference.class )
+		{
+			//JSONObject mjo = getMetaData(ref.getCategoryMetadataReferenceString());
+			JSONObject mjo = getData(ref.getCategoryMetadataReferenceString());
+			ac.loadMetaData(mjo);
+		}
 		
 		return ac;
 	}
 
 
-	public AprentisCategory loadCategory(AprentisCategoryReference ref) throws IOException 
+	public  JSONObject loadRecord(String ref) throws IOException {
+		//JSONObject jo = getData(ref.getAsString());
+		JSONObject jo = getData(ref);
+		//dumpJson(jo);
+		System.out.println(jo);
+		return jo;
+	}
+
+
+	/*public AprentisCategory loadCategory(AprentisCategoryReference ref) throws IOException 
 	{		
 		return loadCategory(ref.getAsString());
-	}
+	}*/
 
 
 

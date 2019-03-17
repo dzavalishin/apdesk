@@ -37,6 +37,12 @@ public class AprentisField
 			value = new AprentisNumeric(dv);
 			valString = value.toString();
 		}
+
+		if (val instanceof Integer) {
+			Integer iv = (Integer) val;
+			value = new AprentisNumeric(iv);
+			valString = value.toString();
+		}
 		
 		if (val instanceof Boolean) {
 			value = new AprentisBool((Boolean)val);
@@ -121,4 +127,23 @@ public class AprentisField
 
 
 	//public void setValue(AprentisFieldValue value) {		this.value = value;	}
+	
+	
+	@Override
+	public int hashCode() {
+		return name.hashCode();
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		
+		if( obj == null ) return false;
+		
+		if (obj instanceof AprentisField) {
+			AprentisField af = (AprentisField) obj;
+
+			return name.equals(af.name);
+		}
+		return false;
+	}
 }

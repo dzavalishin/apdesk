@@ -55,25 +55,12 @@ public class AprentisEntityListView
 		super();
 		this.ac = ac;
 
-		//this.type = type;
-		//this.rc = rc;
-		//title = "Список: "+type.getDisplayName();
-		title = "Список: ";
-		//tc = sc.getTypeCache(type); //new PerTypeCache(type, rc);
-		/*
-		try {
-			objList = sc.loadUnitList(type);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
+		title = "Список: "+ac.getVisibleNamePlural();
 	}
 
 
 
-	public String getTitle() {
-		return title;
-	}
+	public String getTitle() {		return title; }
 
 
 

@@ -119,7 +119,13 @@ public class Engine {
 		
 		return true;
 	}
-	
+
+	/**
+	 * Used for lazy load of records.
+	 * @return loader
+	 */
+	public static AprentisRestCaller getRestCaller() { return get().arc; }
+
 	
 	private AprentisSystemRecordReference parseSystemRecordRef(JSONObject jo, String key) {
 		AprentisSystemRecordReference ref = new AprentisSystemRecordReference(jo.getString(key));
@@ -191,6 +197,7 @@ public class Engine {
 
 	public String getLoggedInUser() {		return loggedInUser;	}
 
+	
 	
 	
 }
