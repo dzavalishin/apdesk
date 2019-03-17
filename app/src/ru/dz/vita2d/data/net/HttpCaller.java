@@ -101,6 +101,21 @@ public class HttpCaller {
 		return out;
 	}
 
+	protected JSONObject getJSONWithMeta(String urlTail) throws IOException {
+		HttpURLConnection conn = mkConn(urlTail);
+		conn.setRequestMethod("GET");
+		conn.setRequestProperty("Meta", "true");
+	
+		checkResponceCode(conn);
+	
+		InputStream is = conn.getInputStream();
+	
+		JSONObject out = loadJSON(is);
+		conn.disconnect();
+		return out;
+	}
+	
+	
 	protected JSONObject post(String urlTail, String postData) throws IOException {
 		HttpURLConnection conn = mkConn(urlTail);
 		conn.setRequestMethod("POST");

@@ -24,6 +24,24 @@ public class Engine {
 	private static Engine me = new Engine();
 
 	// -----------------------------------------------------
+	// Server info
+	// -----------------------------------------------------
+	
+	protected AprentisSystemRecordReference areaKey = null;
+	protected AprentisSystemRecordReference profileKey = null;
+	protected AprentisSystemRecordReference roleKey = null;
+	protected AprentisSystemRecordReference userAKey = null;
+	protected AprentisSystemRecordReference userCKey = null;
+	
+	// zts table records
+	protected AprentisSystemRecordReference userKey = null;
+	protected AprentisSystemRecordReference companyKey = null;
+	
+	protected String readableUserName = null; 
+	private String loggedInUser = null;
+
+	
+	// -----------------------------------------------------
 	// Static entry points
 	// -----------------------------------------------------
 
@@ -51,6 +69,8 @@ public class Engine {
 	}
 
 
+	public static Engine get() { return me; }
+	
 	// -----------------------------------------------------
 	// Class
 	// -----------------------------------------------------
@@ -78,17 +98,20 @@ public class Engine {
 		JSONObject jo = arc.login(user, password);
 		
 		try {
-			AprentisSystemRecordReference areaKey = parseSystemRecordRef( jo, "AreaKey" );
-			AprentisSystemRecordReference profileKey = parseSystemRecordRef( jo, "ProfileKey" );
-			AprentisSystemRecordReference roleKey = parseSystemRecordRef( jo, "RoleKey" );
-			AprentisSystemRecordReference userAKey = parseSystemRecordRef( jo, "UserAKey" );
-			AprentisSystemRecordReference userCKey = parseSystemRecordRef( jo, "UserCKey" );
+			areaKey = parseSystemRecordRef( jo, "AreaKey" );
+			profileKey = parseSystemRecordRef( jo, "ProfileKey" );
+			roleKey = parseSystemRecordRef( jo, "RoleKey" );
+			userAKey = parseSystemRecordRef( jo, "UserAKey" );
+			userCKey = parseSystemRecordRef( jo, "UserCKey" );
 			
 			// zts table records
-			AprentisSystemRecordReference userKey = parseSystemRecordRef( jo, "UserKey" );
-			AprentisSystemRecordReference companyKey = parseSystemRecordRef( jo, "CompanyKey" );
+			userKey = parseSystemRecordRef( jo, "UserKey" );
+			companyKey = parseSystemRecordRef( jo, "CompanyKey" );
 			
-			String readableUserName = jo.getString("UserName"); 
+			readableUserName = jo.getString("UserName"); 
+			
+			loggedInUser = user;
+			
 			
 		} catch (Exception e) {
 			return false;
@@ -100,7 +123,7 @@ public class Engine {
 	
 	private AprentisSystemRecordReference parseSystemRecordRef(JSONObject jo, String key) {
 		AprentisSystemRecordReference ref = new AprentisSystemRecordReference(jo.getString(key));
-		System.out.println(key+"="+ref);
+		//System.out.println(key+"="+ref);
 		return ref;
 	}
 
@@ -143,6 +166,30 @@ public class Engine {
 		AprentisCategory cat = doGetCategory(catRef);
 		return cat.getRecord(ref);
 	}
+
+
+	// -----------------------------------------------------
+	// Getters
+	// -----------------------------------------------------
+
+
+	public AprentisSystemRecordReference getAreaKey() {		return areaKey;	}
+
+	public AprentisSystemRecordReference getProfileKey() {		return profileKey;	}
+
+	public AprentisSystemRecordReference getRoleKey() {		return roleKey;	}
+
+	public AprentisSystemRecordReference getUserAKey() {		return userAKey;	}
+
+	public AprentisSystemRecordReference getUserCKey() {		return userCKey;	}
+
+	public AprentisSystemRecordReference getUserKey() {		return userKey;	}
+
+	public AprentisSystemRecordReference getCompanyKey() {		return companyKey;	}
+
+	public String getReadableUserName() {		return readableUserName;	}
+
+	public String getLoggedInUser() {		return loggedInUser;	}
 
 	
 	

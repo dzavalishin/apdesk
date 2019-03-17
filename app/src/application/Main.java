@@ -13,6 +13,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 import ru.dz.aprentis.Engine;
+import ru.dz.aprentis.ui.AprentisEntityFormWindow;
 import ru.dz.vita2d.data.net.IRestCaller;
 import ru.dz.vita2d.data.net.RestCaller;
 import ru.dz.vita2d.data.net.ServerCache;
@@ -59,6 +60,16 @@ public class Main extends Application
 		Engine.start("https://app.aprentis.ru");
 		try {
 			Engine.login("restapi@facex.com","facex");
+			
+			//new AprentisEntityFormWindow( Engine.get().getUserKey() );
+			//new AprentisEntityFormWindow( Engine.get().getProfileKey() );
+			//new AprentisEntityFormWindow( Engine.get().getRoleKey() );
+			
+			new AprentisEntityFormWindow( Engine.get().getAreaKey() );
+			new AprentisEntityFormWindow( Engine.get().getCompanyKey() );
+			new AprentisEntityFormWindow( Engine.get().getUserAKey() );
+			new AprentisEntityFormWindow( Engine.get().getUserCKey() );
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

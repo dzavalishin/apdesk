@@ -126,10 +126,11 @@ public class AprentisEntityFormView
 		// TODO open view
 		System.out.println("go to "+ref);
 		AprentisRecordReference rr = new AprentisRecordReference(ref);
-		AprentisCategoryReference cr = rr.getCategoryReference();
+		//AprentisCategoryReference cr = rr.getCategoryReference();
 		
 		try {
-			new AprentisEntityFormWindow( Engine.getCategory(cr), rr );
+			//new AprentisEntityFormWindow( Engine.getCategory(cr), rr );
+			new AprentisEntityFormWindow( rr );
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

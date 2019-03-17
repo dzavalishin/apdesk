@@ -31,6 +31,12 @@ public class AprentisCategory extends AprentisEntity
 	}
 
 
+	public void loadMetaData(JSONObject mjo) {
+		System.out.println(mjo);
+		
+	}
+	
+	
 
 	public void forEachRecord(Consumer<AprentisRecord> c) {
 		for (AprentisRecord r : records.values()) {
@@ -44,5 +50,8 @@ public class AprentisCategory extends AprentisEntity
 	{
 		return records.get(arr.getAsString());
 	}
+
+
+
 
 }

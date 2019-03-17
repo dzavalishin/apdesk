@@ -38,7 +38,7 @@ public class AprentisRestCaller extends HttpCaller //implements IRestCaller
 
 		loggedInUser = login;
 
-		System.out.println("Logged in: "+data);
+		//System.out.println("Logged in: "+data);
 
 		return data;
 	}
@@ -50,7 +50,17 @@ public class AprentisRestCaller extends HttpCaller //implements IRestCaller
 		return getJSON(key+"/json/v2");
 	}
 
+	/**
+	 * Get table data with metadata. Attempt to get minimal possible data size (1 record?).
+	 * @param key table key
+	 * @return json with metadata and data
+	 * @throws IOException if disconnect
+	 */
+	private JSONObject getMetaData(String key) throws IOException {
+		return getJSONWithMeta(key+"/json/v2");
+	}
 
+	
 
 
 
@@ -296,6 +306,10 @@ public class AprentisRestCaller extends HttpCaller //implements IRestCaller
 		//AprentisRecord ar = new AprentisRecord(jo);
 		AprentisCategory ac = new AprentisCategory();
 		ac.loadData(jo);
+		
+		JSONObject mjo = getMetaData(categoryKey);
+		ac.loadMetaData(mjo);
+		
 		return ac;
 	}
 
