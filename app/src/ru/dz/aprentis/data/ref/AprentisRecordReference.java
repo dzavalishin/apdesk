@@ -1,4 +1,4 @@
-package ru.dz.aprentis.data;
+package ru.dz.aprentis.data.ref;
 
 public class AprentisRecordReference extends AbstractAprentisReference 
 {

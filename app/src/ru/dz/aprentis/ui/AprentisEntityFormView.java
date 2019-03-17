@@ -18,9 +18,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import ru.dz.aprentis.Engine;
 import ru.dz.aprentis.data.AprentisCategory;
-import ru.dz.aprentis.data.AprentisCategoryReference;
 import ru.dz.aprentis.data.AprentisRecord;
-import ru.dz.aprentis.data.AprentisRecordReference;
+import ru.dz.aprentis.data.ref.AprentisCategoryReference;
+import ru.dz.aprentis.data.ref.AprentisRecordReference;
 import ru.dz.aprentis.data.type.AprentisReference;
 
 /**

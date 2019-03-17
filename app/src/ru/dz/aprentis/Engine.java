@@ -7,11 +7,11 @@ import java.util.Map;
 import org.json.JSONObject;
 
 import ru.dz.aprentis.data.AprentisCategory;
-import ru.dz.aprentis.data.AprentisCategoryReference;
 import ru.dz.aprentis.data.AprentisRecord;
-import ru.dz.aprentis.data.AprentisRecordReference;
 import ru.dz.aprentis.data.AprentisRestCaller;
-import ru.dz.aprentis.data.AprentisSystemRecordReference;
+import ru.dz.aprentis.data.ref.AprentisCategoryReference;
+import ru.dz.aprentis.data.ref.AprentisRecordReference;
+import ru.dz.aprentis.data.ref.AprentisSystemRecordReference;
 
 /**
  * Main entry point. Singleton.

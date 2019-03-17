@@ -5,8 +5,8 @@ import java.io.IOException;
 import javafx.scene.Scene;
 import ru.dz.aprentis.Engine;
 import ru.dz.aprentis.data.AprentisCategory;
-import ru.dz.aprentis.data.AprentisCategoryReference;
-import ru.dz.aprentis.data.AprentisRecordReference;
+import ru.dz.aprentis.data.ref.AprentisCategoryReference;
+import ru.dz.aprentis.data.ref.AprentisRecordReference;
 
 public class AprentisEntityFormWindow extends AbstractFormWindow 
 {

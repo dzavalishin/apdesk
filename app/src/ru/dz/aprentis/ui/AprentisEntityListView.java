@@ -24,7 +24,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import ru.dz.aprentis.data.AprentisCategory;
 import ru.dz.aprentis.data.AprentisRecord;
-import ru.dz.aprentis.data.AprentisRecordReference;
+import ru.dz.aprentis.data.ref.AprentisRecordReference;
 import ru.dz.vita2d.data.filter.FilterSet;
 /**
  * </p>Display list of entities.</p>

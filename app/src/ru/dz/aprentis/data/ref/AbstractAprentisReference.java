@@ -1,4 +1,4 @@
-package ru.dz.aprentis.data;
+package ru.dz.aprentis.data.ref;
 
 public abstract class AbstractAprentisReference implements IAprentisReference {
 

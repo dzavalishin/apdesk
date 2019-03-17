@@ -7,6 +7,8 @@ import java.util.function.Consumer;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import ru.dz.aprentis.data.ref.AprentisRecordReference;
+
 public class AprentisCategory extends AprentisEntity 
 {
 	private Map<String,AprentisRecord> records = new HashMap<String, AprentisRecord>();

@@ -5,6 +5,7 @@ import java.net.MalformedURLException;
 
 import org.json.JSONObject;
 
+import ru.dz.aprentis.data.ref.AprentisCategoryReference;
 import ru.dz.vita2d.data.net.HttpCaller;
 
 
