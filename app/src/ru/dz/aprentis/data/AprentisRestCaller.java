@@ -299,5 +299,11 @@ public class AprentisRestCaller extends HttpCaller //implements IRestCaller
 	}
 
 
+	public AprentisCategory loadCategory(AprentisCategoryReference ref) throws IOException 
+	{		
+		return loadCategory(ref.getAsString());
+	}
+
+
 
 }
