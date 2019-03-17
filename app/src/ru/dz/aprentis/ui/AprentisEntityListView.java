@@ -152,6 +152,11 @@ public class AprentisEntityListView
 		// TODO fix me
 		//String readableName = tc.getFieldName(fName);
 		String readableName = fName;
+		
+		// TODO hack
+		if( readableName.startsWith("custom_") )
+			readableName = readableName.substring( 7 );
+		
 		if( readableName == null )
 			return;
 

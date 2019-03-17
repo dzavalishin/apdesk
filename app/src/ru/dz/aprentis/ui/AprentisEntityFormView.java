@@ -124,7 +124,7 @@ public class AprentisEntityFormView
 			return;
 
 		// TODO open view
-		System.out.println("go to "+ref);
+		//System.out.println("go to "+ref);
 		AprentisRecordReference rr = new AprentisRecordReference(ref);
 		//AprentisCategoryReference cr = rr.getCategoryReference();
 		

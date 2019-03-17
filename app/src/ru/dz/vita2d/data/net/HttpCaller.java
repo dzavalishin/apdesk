@@ -105,7 +105,9 @@ public class HttpCaller {
 		HttpURLConnection conn = mkConn(urlTail);
 		conn.setRequestMethod("GET");
 		conn.setRequestProperty("Meta", "true");
-	
+
+		System.err.println(conn.getRequestProperties());
+		
 		checkResponceCode(conn);
 	
 		InputStream is = conn.getInputStream();

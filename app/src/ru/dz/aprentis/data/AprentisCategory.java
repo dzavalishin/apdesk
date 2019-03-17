@@ -31,6 +31,7 @@ public class AprentisCategory extends AprentisEntity
 	}
 
 
+	// TODO parse and store metadata
 	public void loadMetaData(JSONObject mjo) {
 		System.out.println(mjo);
 		
