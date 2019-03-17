@@ -1,12 +1,10 @@
 package application;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Optional;
 import java.util.Properties;
-
-// http://sv-web-15.vtsft.ru/orvd-release/index/#
-// http://sv-web-15.vtsft.ru/orvd-test/index/#
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -14,6 +12,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
+import ru.dz.aprentis.Engine;
 import ru.dz.vita2d.data.net.IRestCaller;
 import ru.dz.vita2d.data.net.RestCaller;
 import ru.dz.vita2d.data.net.ServerCache;
@@ -57,6 +56,14 @@ public class Main extends Application
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
 
+		Engine.start("https://app.aprentis.ru");
+		try {
+			Engine.login("restapi@facex.com","facex");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		if( Defs.FULL_SCREEN)
 		{
 			//primaryStage.initStyle(StageStyle.UNDECORATED);

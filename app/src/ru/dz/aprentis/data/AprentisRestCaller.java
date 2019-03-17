@@ -32,14 +32,15 @@ public class AprentisRestCaller extends HttpCaller //implements IRestCaller
 	 * @see ru.dz.vita2d.data.IRestCaller#login(java.lang.String, java.lang.String)
 	 */
 	//@Override
-	public void login( String login, String password ) throws IOException 
+	public JSONObject login( String login, String password ) throws IOException 
 	{
 		JSONObject data = postAuth("authenticate/json/v2", login, password );
 
 		loggedInUser = login;
 
-		System.out.println("Logged in\n");
+		System.out.println("Logged in: "+data);
 
+		return data;
 	}
 
 

@@ -1,18 +1,19 @@
 package ru.dz.aprentis.data;
 
-public class AprentisRecordReference implements IAprentisReference 
+public class AprentisRecordReference extends AbstractAprentisReference 
 {
-	private String ref;
 
 	public AprentisRecordReference(String ref) {
-		this.ref = ref;
-		
+		super(ref);
+	}
+
+
+	@Override
+	protected void checkFormat(String ref) {
 		if( !ref.matches("c[0-9]+a[0-9]+t[0-9]+r[0-9]+") )
 			throw new RuntimeException("record ref syntax: "+ref);
 	}
 	
-	@Override
-	public String getAsString() { return ref; }
 
 	// Cat ref is rec ref but final number
 	public AprentisCategoryReference getCategoryReference()

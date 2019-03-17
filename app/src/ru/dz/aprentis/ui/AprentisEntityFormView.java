@@ -16,7 +16,9 @@ import javafx.scene.control.cell.MapValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import ru.dz.aprentis.Engine;
 import ru.dz.aprentis.data.AprentisCategory;
+import ru.dz.aprentis.data.AprentisCategoryReference;
 import ru.dz.aprentis.data.AprentisRecord;
 import ru.dz.aprentis.data.AprentisRecordReference;
 import ru.dz.aprentis.data.type.AprentisReference;
@@ -123,6 +125,15 @@ public class AprentisEntityFormView
 
 		// TODO open view
 		System.out.println("go to "+ref);
+		AprentisRecordReference rr = new AprentisRecordReference(ref);
+		AprentisCategoryReference cr = rr.getCategoryReference();
+		
+		try {
+			new AprentisEntityFormWindow( Engine.getCategory(cr), rr );
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		/*
 		IRef iref = IRef.deserialize(ref);
 		try {

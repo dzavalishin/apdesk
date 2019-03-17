@@ -18,7 +18,9 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import ru.dz.aprentis.Engine;
 import ru.dz.aprentis.data.AprentisCategory;
+import ru.dz.aprentis.data.AprentisCategoryReference;
 import ru.dz.aprentis.data.AprentisRestCaller;
 import ru.dz.aprentis.ui.AprentisEntityListWindow;
 import ru.dz.vita2d.data.ref.IRef;
@@ -156,6 +158,7 @@ public abstract class AbstractMapScene implements IMapScene
 	{
 		MenuItem dataItem = new MenuItem(name);
 		dataItem.setOnAction(actionEvent -> {
+			/*
 			AprentisRestCaller rc = new AprentisRestCaller("https://app.aprentis.ru");
 
 			try {
@@ -166,7 +169,8 @@ public abstract class AbstractMapScene implements IMapScene
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
+			*/
+			new AprentisEntityListWindow( Engine.getCategory(new AprentisCategoryReference(tableKey)) );
 			
 		});
 
