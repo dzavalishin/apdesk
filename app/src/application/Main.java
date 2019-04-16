@@ -65,8 +65,8 @@ public class Main extends Application
 			//new AprentisEntityFormWindow( Engine.get().getProfileKey() );
 			//new AprentisEntityFormWindow( Engine.get().getRoleKey() );
 			
-			new AprentisEntityFormWindow( Engine.get().getAreaKey() );
-			//new AprentisEntityFormWindow( Engine.get().getCompanyKey() );
+			//new AprentisEntityFormWindow( Engine.get().getAreaKey() );
+			new AprentisEntityFormWindow( Engine.get().getCompanyKey() );
 			//new AprentisEntityFormWindow( Engine.get().getUserAKey() );
 			//new AprentisEntityFormWindow( Engine.get().getUserCKey() );
 			
